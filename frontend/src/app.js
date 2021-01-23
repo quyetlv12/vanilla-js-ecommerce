@@ -1,7 +1,10 @@
-import Home from './pages/Home.js';
-import Product from './pages/Product.js';
+import Homepage from './pages/Home.js';
+import ProductDetailPage from './pages/Product.js';
 import Error404Page from './pages/Error404Page.js';
 import { parseRequestUrl } from './utils.js'
+
+const homePage = new Homepage();
+const productDetailPage =  new ProductDetailPage();
 
 const $ = selector => {
     const elements = document.querySelectorAll(selector);
@@ -9,8 +12,8 @@ const $ = selector => {
 }
 
 const routes = {
-    '/': Home,
-    '/product/:id': Product
+    '/': homePage,
+    '/product/:id': productDetailPage
 }
 
 const router = () => {
@@ -19,10 +22,10 @@ const router = () => {
     const parseUrl = (request.resource ? `/${request.resource}` : '/') +
         (request.id ? '/:id' : '');
 
-    const screen = routes[parseUrl] ? routes[parseUrl] : Error404Page;
+    const page = routes[parseUrl] ? routes[parseUrl] : Error404Page;
 
     const main = $('#main-content');
-    main.innerHTML = screen.render();
+    main.innerHTML = page.render();
 }
 window.addEventListener('DOMContentLoaded', router);
 window.addEventListener('hashchange', router)

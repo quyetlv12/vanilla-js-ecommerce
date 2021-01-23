@@ -1,6 +1,6 @@
 import data from '../data.js';
-class Home {
-    static render() {
+class HomePage {
+    render() {
         const { products } = data;
         return `<ul>
                     ${products.map(item => `<li>
@@ -8,4 +8,4 @@ class Home {
                </ul>`
     }
 };
-export default Home;
+export default HomePage;
